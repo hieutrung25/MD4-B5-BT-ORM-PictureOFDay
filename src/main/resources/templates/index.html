@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <header th:replace="layout :: header"></header>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mb-4 bg-white">
+                    <div class="entry2">
+                        <a href="single.html" id="image-link">
+                            <img src="" alt="Image" class="img-fluid rounded"
+                                 id="image-pic">
+                        </a>
+                        <div class="excerpt">
+                            <span class="post-category text-white bg-secondary mb-3"
+                                  id="image-category">Chủ đề ảnh</span>
+                            <h2>
+                                <a href="single.html"
+                                   id="image-title">Tiêu đề ảnh</a>
+                            </h2>
+                            <div class="post-meta align-items-center text-left clearfix">
+                                <figure class="author-figure mb-0 mr-3 float-left">
+                                    <img src="images/person_1.jpg" alt="Image" class="img-fluid"
+                                         id="image-author-pic">
+                                </figure>
+                                <span class="d-inline-block mt-1">Bởi
+                                    <a href="#" id="image-author-title">Tác giả ảnh</a>
+                                </span>
+                                <span id="image-date">&nbsp;-&nbsp; Ngày chụp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="mb-5" style="font-size: 26px"
+                        th:text="${commentList.size() + ' Bình Luận'}"> Số lượng Comment hiển thị ở đây
+                    </h3>
+                    <ul class="comment-list">
+                        <th:block th:each="comment : ${commentList}">
+                            <li class="comment">
+                                <div class="comment-body" style="width: 1120px">
+                                    <h3 th:text="${comment.author}">Tên người comment</h3>
+                                    <div class="meta" th:text="${comment.postTime}">Ngày bình luận</div>
+                                    <div class="meta" th:text="${comment.likes + ' Lượt thích'}">Lượt thích</div>
+                                    <p th:text="${comment.content}">Nội dung bình luận</p>
+                                    <p>
+                                        <a th:href="@{/comment/like/{image}/{comment}(comment=${comment.id}, image=${picture.id})}"
+                                           class="reply rounded">Thích</a>
+                                    </p>
+                                </div>
+                            </li>
+                        </th:block>
+                    </ul>
+                    <div class="comment-form-wrap pt-5">
+                        <h3 class="mb-5" style="font-size: 26px">Để lại bình luận</h3>
+                        <form th:action="@{/comment/submit/{imageId}(imageId=${picture.id})}" method="POST"
+                              th:object="${newComment}" class="p-5 bg-light">
+                            <div class="form-group">
+                                <label for="name">Họ tên</label>
+                                <input type="text" class="form-control" id="name" th:field="*{author}">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Bình luận</label>
+                                <textarea name="" id="message" cols="30" rows="2" th:field="*{content}"
+                                          class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="score">Điểm</label>
+                                <select name="" id="score" th:field="*{mark}">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Đăng" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center pt-5 border-top">
+                <div class="col-md-12">
+                    <div class="custom-pagination">
+                        <th:block th:each="pageNum : ${#numbers.sequence(0,(picturePage.totalPages - 1))}">
+                            <a th:href="@{/images(page=${pageNum})}"
+                               th:text="${pageNum + 1}"></a>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="layout :: footer"></div>
+
+</div>
+
+<div th:replace="layout :: script"></div>
+<script th:inline="javascript">
+    let query = "https://api.unsplash.com/photos?page=1&client_id=IdusRIk1r39o-uOTKwKK0hmrf4Tb1Au9QI4L78NYtoQ"
+    let request = new XMLHttpRequest();
+    let index = [[${picture.id - 1}]];
+    request.open('GET', query);
+    request.onload = function () {
+        if (request.status === 200) {
+            let response = JSON.parse(request.responseText);
+            let date = new Date(response[index].created_at);
+            let display = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+
+            document.getElementById("image-pic").setAttribute("src", response[index].urls.regular);
+            document.getElementById("image-link").setAttribute("href", response[index].urls.regular);
+            document.getElementById("image-title").innerText = response[index].description;
+            document.getElementById("image-title").setAttribute("href", response[index].links.html);
+            document.getElementById("image-author-title").innerText = response[index].user.name;
+            document.getElementById("image-author-title").setAttribute("href", response[index].user.links.html);
+            document.getElementById("image-category").innerText = response[index].user.name;
+            document.getElementById("image-author-pic").setAttribute("src", response[index].user.profile_image.medium);
+            document.getElementById("image-date").innerHTML = "&nbsp;" + "-" + "&nbsp;" + "Chụp ngày: " + "&nbsp;" + display;
+        }
+    }
+    request.send();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <title>Bức ảnh trong ngày</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700|Playfair+Display:400,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/fonts/icomoon/style.css" th:href="@{/fonts/icomoon/style.css}">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css" th:href="@{/css/magnific-popup.css}">
+    <link rel="stylesheet" href="../static/css/jquery-ui.css" th:href="@{/css/jquery-ui.css}">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css" th:href="@{/css/owl.carousel.min.css}">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css" th:href="@{/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" href="../static/css/bootstrap-datepicker.css" th:href="@{/css/bootstrap-datepicker.css}">
+    <link rel="stylesheet" href="../static/fonts/flaticon/font/flaticon.css"
+          th:href="@{/fonts/flaticon/font/flaticon.css}">
+    <link rel="stylesheet" href="../static/css/aos.css" th:href="@{/css/aos.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+</head>
+<body>
+<header class="site-navbar" role="banner" th:fragment="header">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-4 site-logo" style="padding-top: 15px; padding-bottom: 15px">
+                        <a href="/" class="text-black h2 mb-0" th:text="${'Ảnh trong ngày ' + timeNow}">Ảnh trong ngày</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+
+<div class="site-footer" th:fragment="footer">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <h3 class="footer-heading mb-4">Thông tin thêm</h3>
+                <p>Mình là một lập trình viên (người lập trình hay thảo chương viên điện toán) là người viết ra các
+                    chương
+                    trình máy tính. "Thảo chương viên điện toán" là một từ cũ, được dùng trước năm 1975, và đang trở nên
+                    ít phổ thông hơn. Theo thuật ngữ máy tính, lập trình viên có thể là một chuyên gia trong một lĩnh
+                    vực của chương trình máy tính hoặc là một người không chuyên, viết mã cho các loại phần mềm. Người
+                    đã thực hiện và đưa ra cách tiếp cận chính thức để lập trình được gọi là người phân tích phần
+                    mềm.</p>
+            </div>
+            <div class="col-md-4" style="float: right">
+                <div>
+                    <h3 class="footer-heading mb-4">Mình dùng mạng xã hội này</h3>
+                    <p>
+                        <a href="https://github.com/vanduc2514"><span class="icon-github p-2"></span></a>
+                        <a href="https://www.facebook.com/vanduc2514"><span
+                                class="icon-facebook pt-2 pr-2 pb-2 pl-0"></span></a>
+                        <a href="https://twitter.com/ducpayaya"><span class="icon-twitter p-2"></span></a>
+                        <a href="https://www.instagram.com/ducpayaya/"><span class="icon-instagram p-2"></span></a>
+                        <a href="https://www.youtube.com/user/vanduc2514"><span class="icon-youtube p-2"></span></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p>
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear().toString());</script>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="script">
+    <script src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="../static/js/jquery-migrate-3.0.1.min.js" th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+    <script src="../static/js/jquery-ui.js" th:src="@{/js/jquery-ui.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
+    <script src="../static/js/jquery.stellar.min.js" th:src="@{/js/jquery.stellar.min.js}"></script>
+    <script src="../static/js/jquery.countdown.min.js" th:src="@{/js/jquery.countdown.min.js}"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+    <script src="../static/js/bootstrap-datepicker.min.js" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+    <script src="../static/js/aos.js" th:src="@{/js/aos.js}"></script>
+    <script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
+</div>
+
+</body>
+</html>
